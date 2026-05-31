@@ -573,11 +573,16 @@ main {
   color: var(--marron);
 }
 
+.card-text {
+  display: flex;
+  flex-direction: column;
+}
+
 .card-book {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1rem;
+  margin: 1rem 0 0 0;
   padding: 0.85rem 1rem;
   border-radius: 999px;
   background: var(--marron);
@@ -585,6 +590,8 @@ main {
   font-weight: 700;
   text-decoration: none;
   transition: transform 0.2s ease, background 0.2s ease;
+  order: 999;
+  align-self: flex-start;
 }
 
 .card-book:hover {

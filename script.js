@@ -90,7 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
       button.textContent = 'Agendar';
 
       const cardText = article.querySelector('.card-text');
-      if (cardText) cardText.appendChild(button);
+      if (cardText) {
+        const priceItems = Array.from(cardText.querySelectorAll('.price'));
+        const insertAfter = priceItems.length ? priceItems[priceItems.length - 1] : null;
+        if (insertAfter) {
+          insertAfter.insertAdjacentElement('afterend', button);
+        } else {
+          cardText.appendChild(button);
+        }
+      }
     });
   }
 
