@@ -74,20 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addCardScheduleButtons() {
-    const phone = '5551995345142';
     const cards = Array.from(document.querySelectorAll('main article.card'));
 
     cards.forEach(article => {
       const titleEl = article.querySelector('h3');
       if (!titleEl) return;
       const title = titleEl.textContent.trim();
-      const text = encodeURIComponent(`Olá, gostaria de agendar ${title}. Por favor, me envie dias e horários disponíveis para confirmação de disponibilidade.`);
       const button = document.createElement('a');
       button.className = 'card-book';
-      button.href = `https://wa.me/${phone}?text=${text}`;
+      button.textContent = 'Agendar';
+      button.href = `../Agenda-adm/index.html?service=${encodeURIComponent(title)}`;
       button.target = '_blank';
       button.rel = 'noopener noreferrer';
-      button.textContent = 'Agendar';
 
       const cardText = article.querySelector('.card-text');
       if (cardText) {
