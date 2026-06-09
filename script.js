@@ -6,11 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function resolveBookingPageBase() {
     if (window.BOOKING_PAGE_BASE) return window.BOOKING_PAGE_BASE;
-    try {
-      return new URL('../Agenda-adm/index.html', window.location.href).href;
-    } catch (_err) {
+    const pathname = window.location.pathname.replace(/\\/g, '/');
+    if (pathname.includes('/Frontend-catalogo/')) {
+      return '../Agenda-adm/index.html';
+    }
+    if (pathname.endsWith('/')) {
       return 'Agenda-adm/index.html';
     }
+    return './Agenda-adm/index.html';
   }
 
   const bookingPageBase = resolveBookingPageBase();
