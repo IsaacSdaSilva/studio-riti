@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:3000';
+const API_BASE = 'https://studio-riti-backend-production.up.railway.app';
 const ADMIN_TOKEN = 'adm123'; // change via env on server for production
 const isAdminPage = true;
 
