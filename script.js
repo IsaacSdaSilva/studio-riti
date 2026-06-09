@@ -3,7 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const menu = document.querySelector('.menu');
   const body = document.body;
   const menuSections = document.querySelector('.menu-sections');
-  const bookingPageBase = window.BOOKING_PAGE_BASE || (window.location.protocol === 'file:' ? '../Agenda-adm/index.html' : '/Agenda-adm/index.html');
+
+  function resolveBookingPageBase() {
+    if (window.BOOKING_PAGE_BASE) return window.BOOKING_PAGE_BASE;
+    try {
+      return new URL('../Agenda-adm/index.html', window.location.href).href;
+    } catch (_err) {
+      return 'Agenda-adm/index.html';
+    }
+  }
+
+  const bookingPageBase = resolveBookingPageBase();
 
   function buildAccordionMenu() {
     const sections = Array.from(document.querySelectorAll('main section[id]'));
