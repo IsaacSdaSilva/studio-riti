@@ -1,0 +1,12 @@
+{
+  "name": "catalogo-riti-root",
+  "private": true,
+  "main": "Backend/server.js",
+  "scripts": {
+    "start": "node Backend/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}
