@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const menu = document.querySelector('.menu');
   const body = document.body;
   const menuSections = document.querySelector('.menu-sections');
+  const bookingPageBase = window.BOOKING_PAGE_BASE || (window.location.protocol === 'file:' ? '../Agenda-adm/index.html' : '/Agenda-adm/index.html');
 
   function buildAccordionMenu() {
     const sections = Array.from(document.querySelectorAll('main section[id]'));
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const button = document.createElement('a');
       button.className = 'card-book';
       button.textContent = 'Agendar';
-      button.href = `../Agenda-adm/index.html?service=${encodeURIComponent(title)}`;
+      button.href = `${bookingPageBase}?service=${encodeURIComponent(title)}`;
       button.target = '_blank';
       button.rel = 'noopener noreferrer';
 
