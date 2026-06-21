@@ -97,7 +97,7 @@ function buildWhatsAppMessage(payload) {
 
 function openWhatsAppBooking(payload) {
   const url = `https://wa.me/${BUSINESS_PHONE.replace(/\D/g, '')}?text=${encodeURIComponent(buildWhatsAppMessage(payload))}`;
-  window.open(url, '_blank', 'noopener,noreferrer');
+  window.location.href = url;
 }
 
 async function fetchAppointments() {
@@ -277,7 +277,7 @@ form.addEventListener('submit', async (event) => {
   }
 
   const whatsappUrl = `https://wa.me/${BUSINESS_PHONE}?text=${encodeURIComponent(buildWhatsAppMessage(payload))}`;
-  window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  window.location.href = whatsappUrl;
 
   try {
     const res = await fetch(`${API_BASE}/agenda`, {
