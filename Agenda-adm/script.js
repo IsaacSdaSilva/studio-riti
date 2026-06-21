@@ -29,6 +29,7 @@ const services = [
 const urlParams = new URLSearchParams(window.location.search);
 const selectedService = urlParams.get('service') || '';
 const isAdminPage = urlParams.get('admin') === '1';
+const BUSINESS_PHONE = '51995345142';
 
 const form = document.getElementById('appointment-form');
 const messageBox = document.getElementById('message');
@@ -86,6 +87,17 @@ function enforceBusinessHours() {
   appointmentTime.min = '09:00';
   appointmentTime.max = '19:30';
   appointmentTime.step = 1800; // steps of 30 minutes
+}
+
+function buildWhatsAppMessage(payload) {
+  const horario = payload.horario || '';
+  const obs = payload.obs ? `\nObservações: ${payload.obs}` : '';
+  return `Olá! Meu nome é ${payload.nome} e gostaria de agendar o serviço *${payload.servico}* para ${horario}.\nMeu contato é ${payload.telefone}.${obs}\nObrigado!`;
+}
+
+function openWhatsAppBooking(payload) {
+  const url = `https://wa.me/${BUSINESS_PHONE.replace(/\D/g, '')}?text=${encodeURIComponent(buildWhatsAppMessage(payload))}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
 }
 
 async function fetchAppointments() {
@@ -273,6 +285,7 @@ form.addEventListener('submit', async (event) => {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Erro ao salvar');
     form.reset();
+    openWhatsAppBooking(payload);
     showMessage('Pedido de agendamento enviado. Aguarde confirmação.');
     if (isAdminPage) setTimeout(renderAppointments, 600);
   } catch (err) {
