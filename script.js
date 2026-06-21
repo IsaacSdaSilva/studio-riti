@@ -17,6 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const bookingPageBase = resolveBookingPageBase();
+  const BUSINESS_PHONE = '51995345142';
+
+  function buildWhatsAppLink(serviceTitle) {
+    const message = serviceTitle
+      ? `Olá! Quero agendar o serviço *${serviceTitle}* no studio Riti Cruz.`
+      : 'Olá! Quero agendar um atendimento no studio Riti Cruz.';
+    return `https://wa.me/${BUSINESS_PHONE.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
+  }
 
   function buildAccordionMenu() {
     const sections = Array.from(document.querySelectorAll('main section[id]'));
@@ -96,8 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = titleEl.textContent.trim();
       const button = document.createElement('a');
       button.className = 'card-book';
-      button.textContent = 'Agendar';
-      button.href = `${bookingPageBase}?service=${encodeURIComponent(title)}`;
+      button.textContent = 'Agendar via WhatsApp';
+      button.href = buildWhatsAppLink(title);
       button.target = '_blank';
       button.rel = 'noopener noreferrer';
 
