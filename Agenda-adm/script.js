@@ -29,7 +29,7 @@ const services = [
 const urlParams = new URLSearchParams(window.location.search);
 const selectedService = urlParams.get('service') || '';
 const isAdminPage = urlParams.get('admin') === '1';
-const BUSINESS_PHONE = '51995345142';
+const BUSINESS_PHONE = '5551995345142';
 
 const form = document.getElementById('appointment-form');
 const messageBox = document.getElementById('message');
@@ -276,6 +276,9 @@ form.addEventListener('submit', async (event) => {
     return;
   }
 
+  const whatsappUrl = `https://wa.me/${BUSINESS_PHONE}?text=${encodeURIComponent(buildWhatsAppMessage(payload))}`;
+  window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
   try {
     const res = await fetch(`${API_BASE}/agenda`, {
       method: 'POST',
@@ -285,7 +288,6 @@ form.addEventListener('submit', async (event) => {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Erro ao salvar');
     form.reset();
-    openWhatsAppBooking(payload);
     showMessage('Pedido de agendamento enviado. Aguarde confirmação.');
     if (isAdminPage) setTimeout(renderAppointments, 600);
   } catch (err) {
