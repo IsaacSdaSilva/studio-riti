@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const bookingPageBase = resolveBookingPageBase();
-  const BUSINESS_PHONE = '51995345142';
+  const BUSINESS_PHONE = '5551995345142';
 
   function buildWhatsAppLink(serviceTitle) {
     const message = serviceTitle
